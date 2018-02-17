@@ -16,6 +16,7 @@ nnoremap <F2> :bp<CR>
 nnoremap <F3> :bn<CR>
 nnoremap <F4> :set rnu!<CR>
 nnoremap <F12> :e ~/.vimrc<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -26,14 +27,15 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloos/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'edkolev/promptline.vim'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'ajmwagar/vim-deus'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Lkaltog/vim-powerline'
+" Plugin 'Lokaltog/vim-powerline'
+Plugin 'majutsushi/tagbar'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -46,10 +48,11 @@ let g:clang_library_path='/usr/lib/llvm-5.0/lib/libclang-5.0.so.1'
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline_left_sep=''
-" let g:airline_right_sep=''
-" let g:Powerline_symbols = 'fancy'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:Powerline_symbols = 'fancy'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tagbar#enabled = 1
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -60,8 +63,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height = 3
 
-execute pathogen#infect()
+" execute pathogen#infect()
 
 " ColorScheme
 colorscheme deus
