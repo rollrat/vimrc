@@ -12,6 +12,10 @@ set linespace=100
 set backspace=indent,eol,start
 set noswapfile
 set hlsearch
+set cursorline
+set wildmenu
+set cindent
+set cinoptions=g-1            " C++ public: etc ...
 filetype off                  " required
 
 " Shorcut
@@ -21,6 +25,7 @@ nnoremap <F4> :set rnu!<CR>
 nnoremap <F5> :TagbarToggle<CR>
 nnoremap <F6> :GundoToggle<CR>
 nnoremap <F12> :e ~/.vimrc<CR>
+autocmd FileType c,cpp,h vnoremap <C-k> :ClangFormat<CR>
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -44,6 +49,13 @@ Plugin 'sjl/gundo.vim'
 Plugin 'jeaye/color_coded'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Plugin 'junegunn/fzf.vim'
+Plugin 'iberianpig/tig-explorer.vim'
+Plugin 'rhysd/vim-clang-format'
+" Plugin 'vim-scripts/Conque-Shell'
+Plugin 'lrvick/Conque-Shell'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Townk/vim-autoclose'
+Plugin 'SirVer/ultisnips'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -52,6 +64,11 @@ filetype plugin indent on    " required
 autocmd vimEnter * NERDTree
 autocmd vimEnter * Tagbar
 " autocmd vimEnter * Gundo
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                      Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:ctrlp_dont_split = 'NERD'
 let g:clang_library_path='/usr/lib/llvm-5.0/lib/libclang-5.0.so.1'
@@ -82,3 +99,19 @@ colorscheme deus
 
 " Color Coded
 let g:color_coded_enabled = 1
+
+" UltiSnips
+let g:UltiSniosExpandTrigger="<tab>"
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                        Command
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " grep command
+command! -nargs=1 GREP :execute 'vimgrep '.string(<q-args>).' '.expand('%') | :bot copen
+function GrepCurrent()
+    let l:cword = expand("<cword>")
+    execute 'vimgrep ' . l:cword . ' ' . expand('%')
+    bot copen  " copen on bottom
+endfunction
+nmap <C-g> :call GrepCurrent()<CR>
