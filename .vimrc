@@ -9,14 +9,18 @@ set shiftwidth=4
 set tags=./tags
 set t_Co=256
 set linespace=100
+set backspace=indent,eol,start
+set noswapfile
+set hlsearch
 filetype off                  " required
 
 " Shorcut
 nnoremap <F2> :bp<CR>
 nnoremap <F3> :bn<CR>
 nnoremap <F4> :set rnu!<CR>
+nnoremap <F5> :TagbarToggle<CR>
+nnoremap <F6> :GundoToggle<CR>
 nnoremap <F12> :e ~/.vimrc<CR>
-nnoremap <F8> :TagbarToggle<CR>
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -36,12 +40,18 @@ Plugin 'ajmwagar/vim-deus'
 Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'Lokaltog/vim-powerline'
 Plugin 'majutsushi/tagbar'
+Plugin 'sjl/gundo.vim'
+Plugin 'jeaye/color_coded'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+" Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 autocmd vimEnter * NERDTree
+autocmd vimEnter * Tagbar
+" autocmd vimEnter * Gundo
 
 let g:ctrlp_dont_split = 'NERD'
 let g:clang_library_path='/usr/lib/llvm-5.0/lib/libclang-5.0.so.1'
@@ -69,3 +79,6 @@ let g:syntastic_loc_list_height = 3
 
 " ColorScheme
 colorscheme deus
+
+" Color Coded
+let g:color_coded_enabled = 1
